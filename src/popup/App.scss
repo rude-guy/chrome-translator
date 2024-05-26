@@ -1,0 +1,39 @@
+.chrome-keys-container {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.chrome-keys-container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.chrome-keys-container input[type='text'] {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  line-height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.chrome-keys-container button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chrome-keys-container button:hover {
+  background-color: #0056b3;
+}

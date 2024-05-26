@@ -12,7 +12,6 @@ export default defineConfig({
     outDir: path.resolve(__dirname, 'dist'),
     rollupOptions: {
       input: {
-        contentPage: path.resolve(__dirname, 'src/contentPage/index.html'),
         popup: path.resolve(__dirname, 'src/popup/index.html'),
       },
       output: {
