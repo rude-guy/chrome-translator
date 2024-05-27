@@ -67,9 +67,6 @@ function App() {
   /** 冒泡拦截 */
   useEffect(() => {
     stopEventsToContainer(divRef.current!);
-    return () => {
-      stopEventsToContainer(divRef.current!, 'removeEventListener');
-    };
   }, []);
 
   const contextValue = useMemo(

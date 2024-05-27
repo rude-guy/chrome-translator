@@ -49,12 +49,16 @@
       color: #252525;
       display: inline;
       font-size: 18px;
-      margin: 0 auto;
+      margin: 0;
       padding: 5px 0;
-      max-height: 300px;
+      height: 100px;
       box-sizing: border-box;
       overflow-y: auto;
       scroll-behavior: smooth;
+
+      p {
+        margin: 0;
+      }
     }
     .bubble-language {
       color: #636363;
