@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "CRXJS Vue Vite Example",
-  "description": "this is my Crxjs&Vue Chrome ext",
+  "name": "chrome-translator",
+  "description": "谷歌翻译插件",
   "version": "1.0.0",
   "permissions": ["storage"],
   "action": {
