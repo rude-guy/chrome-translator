@@ -50,11 +50,12 @@
       display: inline;
       font-size: 18px;
       margin: 0;
-      padding: 5px 0;
+      padding: 10px;
       height: 100px;
       box-sizing: border-box;
       overflow-y: auto;
       scroll-behavior: smooth;
+      border: 1px solid #e5e6eb;
 
       p {
         margin: 0;

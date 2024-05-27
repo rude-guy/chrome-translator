@@ -1,23 +1,19 @@
-import {
-  CSSProperties,
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import selectionInstance, { RectRange } from './composables/selection';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import selectionInstance from './composables/selection';
 import { useClickOutside } from './composables/useClickOutside';
 import { Panel } from './components/panel';
 import { TranslateBtn } from './components/translateBtn';
 import { useApiKey } from './composables/useApikey';
 import { stopEventsToContainer } from './composables/utils';
 
+export type Point = {
+  left: number;
+  top: number;
+};
+
 type ContextType = {
-  rect: RectRange | null;
   apiKey: string;
-  style?: CSSProperties;
+  point: Point | null;
   translateText: string;
   setShowPanel: (value: React.SetStateAction<boolean>) => void;
 };
@@ -25,8 +21,8 @@ type ContextType = {
 const loop = () => {};
 
 const Context = createContext<ContextType>({
-  rect: null,
   apiKey: '',
+  point: null,
   translateText: '',
   setShowPanel: loop,
 });
@@ -38,31 +34,28 @@ export const useTranslateContext = () => {
 function App() {
   const { apiKey } = useApiKey();
   const [translateText, setTranslateText] = useState<string>('');
-  const [rect, setRect] = useState<RectRange | null>(null);
   const divRef = useRef<HTMLDivElement>(null);
   const [showPanel, setShowPanel] = useState(false);
-  const [style, setStyle] = useState<CSSProperties>();
+  const [point, setPoint] = useState<Point | null>(null);
 
   const clearStatus = () => {
-    setRect(null);
     setShowPanel(false);
     setTranslateText('');
-    setStyle(undefined);
+    setPoint(null);
   };
 
   // 外部点击
   useClickOutside(divRef, clearStatus);
 
-  console.log(rect);
-
   useEffect(() => {
-    selectionInstance.on('translate', ({ left, top, rect, selectedText }) => {
+    selectionInstance.on('translate', ({ left, top, selectedText }) => {
       setShowPanel(false);
-      setRect(rect);
       setTranslateText(selectedText);
-      setStyle({ display: 'block', left: `${left}px`, top: `${top}px` });
+      setPoint({ left, top });
     });
   }, [apiKey]);
+
+  console.log(point);
 
   /** 冒泡拦截 */
   useEffect(() => {
@@ -71,13 +64,12 @@ function App() {
 
   const contextValue = useMemo(
     () => ({
-      rect,
-      style,
+      point,
       apiKey,
       translateText,
       setShowPanel,
     }),
-    [rect, style, translateText, apiKey]
+    [point, translateText, apiKey]
   );
   return (
     <Context.Provider value={contextValue}>
